@@ -1,121 +1,219 @@
-<div align="center">
+# Privacy Guard
+### Explainable Application Privacy & Permission Analyzer
 
-# Hackathon Problem-Solving Workspace
+**Privacy Guard** is a privacy analysis platform designed to identify potentially risky Android application permissions and inconsistencies between declared permissions and privacy policies.
 
-**One repository. Ten problem statements. One focused solution at a time.**
-
-A clean starting point for choosing a challenge, building against its official specification, and preparing an evaluable submission.
-
-</div>
+It analyzes an Android application's `AndroidManifest.xml` alongside its privacy policy text to help users understand what information an application may access, identify potential privacy concerns, and make more informed decisions.
 
 ---
 
-## Welcome
+## Project Overview
 
-This repository contains ten independent hackathon problem statements in the top-level folders **`PS01` through `PS10`**. Choose one problem statement (PS) to work on. The shared agent instructions are designed to help an AI coding agent understand the selected challenge, respect its evaluation contract, and keep the working checkout focused.
+Mobile applications often request permissions that may expose sensitive user information, including contacts, location, camera, microphone, and messages.
 
-> **Important:** Once you confirm your choice and the disclosed cleanup scope, the agent is instructed to delete the other PS folders from the current checkout. The selected PS folder and files outside the other top-level `PS##` folders are preserved. Make sure you are comfortable with this before confirming.
+Understanding whether these permissions are necessary is not always easy for ordinary users.
 
-## Problem statements
+Privacy Guard aims to simplify this process by providing an explainable analysis of:
 
-| ID | Problem title | Specification |
-|---|---|---|
-| `PS01` | Explainable Application Privacy and Permission Analyzer | See `PS01.md` |
-| `PS02` | Automated Invoice and Payment Reconciliation Dashboard | See `PS02.md` |
-| `PS03` | Targeted Model-Repair and Regression-Evaluation Pipeline | See `PS03.md` |
-| `PS04` | Offline-First Multimodal AI Assistant for Healthcare | See `PS04.md` |
-| `PS05` | Automated Multi-Agent Codebase Vulnerability and Dependency Graph Auditor | See `PS05.md` |
-| `PS06` | FAIRSHIFT: Auditable Allocation and Decision-Support System | See `PS06.md` |
-| `PS07` | REPROTRACE: Pipeline Observability and Reproducibility Tool | See `PS07.md` |
-| `PS08` | AGENTGATE: Security Gateway for AI Actions and Information-Flow Control | See `PS08.md` |
-| `PS09` | FORGETGRAPH: Dependency-Aware Deletion Orchestrator for ML Pipelines | See `PS09.md` |
-| `PS10` | Open Innovation: Hardware / Embedded Systems / IoT Solution | See `PS10.md` |
+- Android application permissions.
+- Sensitive data access.
+- Privacy policy statements.
+- Permission-policy inconsistencies.
+- Potential security and privacy concerns.
 
-Replace the placeholder titles and specification links above with the official details in the problem folders. The authoritative statement inside the selected folder defines the challenge requirements.
+The goal is not simply to detect permissions, but to explain **why a permission may be risky and what users should investigate.**
 
-## Getting started
+## Key Features
 
-1. Open the repository and review the available folders and problem statement titles.
-2. Tell your coding agent which PS you want to work on. The agent should list the available PS folders and their exact paths before asking you to choose.
-3. Review the agent's confirmation request carefully. It must identify the selected folder and enumerate every other `PS##` folder that will be removed from this checkout.
-4. Confirm only if the selected PS and deletion scope are correct. Before that confirmation, the agent must not delete, move, or clean any PS folder.
-5. After confirmation and cleanup, read the selected problem's specification and follow its setup, build, test, output, and submission requirements.
+### 1. Android Permission Analysis
+- Parses Android `AndroidManifest.xml`.
+- Identifies declared application permissions.
+- Categorizes permissions according to their privacy sensitivity.
+- Highlights potentially unnecessary permissions.
 
-If you do not want the other PS folders removed, decline the cleanup and ask to continue with the selected PS while retaining them. The agent should not proceed with destructive cleanup without your explicit consent.
+### 2. Privacy Policy Analysis
+- Accepts plain-text privacy policies.
+- Identifies important data collection and sharing statements.
+- Examines statements about sensitive user information.
+- Highlights potentially concerning privacy practices.
 
-## How selection and cleanup work
+### 3. Permission & Policy Comparison
+- Compares declared Android permissions with privacy policy statements.
+- Detects potential inconsistencies.
+- Highlights permissions that appear unrelated to the application's stated purpose.
+- Provides understandable explanations of identified concerns.
 
-```mermaid
-flowchart TD
-    A[Inspect PS01–PS10 without changing files] --> B[Show IDs, titles, and paths]
-    B --> C[Ask user to choose one PS]
-    C --> D[Show exact other PS folders to be removed]
-    D --> E{User confirms selection and cleanup?}
-    E -- No --> F[Delete nothing; clarify whether to proceed without cleanup]
-    E -- Yes --> G[Keep selected PS and shared repository files]
-    G --> H[Remove only confirmed unselected PS folders]
-    H --> I[Verify repository contents]
-    I --> J[Build and validate against selected PS specification]
-```
+### 4. Explainable Risk Assessment
+- Identifies potential privacy and security risks.
+- Provides explanations for flagged permissions.
+- Offers recommendations for improving privacy awareness.
+- Helps users understand the analysis rather than relying only on a numerical score.
 
-The cleanup boundary is limited to the explicitly confirmed, unselected top-level problem folders. Shared code, repository metadata, this README, the top-level `AGENTS.md`, logs, and configuration must remain untouched. Do not use broad wildcard deletion. If you later want to switch to a PS folder that was removed, restore or re-clone it first.
+### 5. Web-Based Interface
+- Dark-themed interface.
+- Application name input.
+- AndroidManifest XML input.
+- Privacy policy text input.
+- Integrated analysis workflow.
 
-## Repository guide
+---
+
+## Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| Next.js | Frontend and backend framework |
+| React | User interface |
+| TypeScript | Type-safe development |
+| Tailwind CSS | Interface styling |
+| PostgreSQL | Database |
+| Drizzle ORM | Database interaction |
+| OpenAI API | AI-powered analysis |
+| Vercel | Deployment |
+
+---
+
+## Project Architecture
 
 ```text
-.
-├── AGENTS-generalized.md
-├── agent_trace_instructions_generalized.md
-├── README.md
-├── PS01/
-├── PS02/
-├── PS03/
-├── PS04/
-├── PS05/
-├── PS06/
-├── PS07/
-├── PS08/
-├── PS09/
-└── PS10/
+Privacy Guard
+│
+├── Frontend
+│   ├── Application Input
+│   ├── Manifest Input
+│   ├── Privacy Policy Input
+│   └── Analysis Results
+│
+├── Backend
+│   ├── Manifest Processing
+│   ├── Permission Analysis
+│   ├── Privacy Policy Analysis
+│   └── Risk Assessment
+│
+├── AI Analysis
+│   ├── Policy Interpretation
+│   ├── Permission-Policy Comparison
+│   └── Explainable Recommendations
+│
+└── Database
+    └── PostgreSQL
 ```
-
-Each `PS##/` folder should contain that challenge's participant-facing specification and any allowed starter files or datasets. The actual contents and filenames may differ by problem. Do not assume one PS's input format, output schema, scoring rules, or implementation approach applies to another.
-
-### Agent guidance files
-
-- **`AGENTS-generalized.md`** — primary coding-agent guidance: PS selection and confirmed cleanup, session logging, challenge contract, evaluation safeguards, and cross-platform compatibility. If your coding tool expects a file named `AGENTS.md`, rename or copy this file to that name at the repository root before starting.
-- **`agent_trace_instructions_generalized.md`** — guidance for collecting, reviewing, redacting, and packaging agent traces. Follow the selected PS's submission instructions if they specify a different trace artifact or archive layout.
-
-## Build, test, and submit
-
-There is no single build command or output format shared across all ten problems. After choosing a PS, read its official specification and any README or setup notes in that folder. Use the required language, dependencies, input paths, output schema, runtime interface, and submission artifact exactly as stated there.
-
-Before submitting, verify that:
-
-- The solution uses only allowed inputs and resources.
-- The required output files exist and match the exact specified schema and coverage.
-- The prescribed run and evaluation steps complete successfully.
-- The package contains every required artifact and excludes credentials, secrets, and prohibited files.
-- Any required agent trace or usage report is included in the requested format.
-
-Use the submission URL stated by the selected challenge. Do not guess a URL or substitute a general contest page for an official submission link.
-
-## Safety and working practices
-
-- **Read the selected specification first.** It is authoritative for problem-specific requirements.
-- **Keep secrets out of source control.** Use environment variables or ignored local configuration when the challenge requires credentials.
-- **Protect private data.** Review traces and outputs for API keys, tokens, passwords, cookies, private keys, and sensitive personal information before sharing.
-- **Keep changes scoped.** Work on the selected PS and shared files only; do not bring assumptions or evaluation labels over from another problem.
-- **Retain trace integrity.** Preserve original structured session logs where practical. Redact only sensitive content, and do not include credentials or unrelated application data.
-
-## Contributing or adding problem details
-
-Before using this README as a public project page, replace the placeholder problem titles with the official titles and link each row to the correct participant-facing specification. Add only verified setup and submission information. Keep challenge-specific facts in the relevant `PS##/` folder rather than duplicating them as assumptions in shared instructions.
 
 ---
 
-<div align="center">
+## Installation & Setup
 
-**Choose carefully. Confirm the cleanup scope. Build to the selected specification.**
+### Prerequisites
 
-</div>
+Make sure you have installed:
+
+- Node.js (LTS recommended)
+- npm
+- Git
+- A PostgreSQL database
+- An OpenAI API key
+
+### 1. Clone the repository
+
+```bash
+git clone YOUR_GITHUB_REPOSITORY_URL
+```
+
+### 2. Navigate to the project
+
+```bash
+cd Privacy-Guard
+```
+
+### 3. Install dependencies
+
+```bash
+npm install
+```
+
+### 4. Configure environment variables
+
+Create a `.env.local` file in the project root directory.
+
+```env
+DATABASE_URL="your_postgresql_connection_string"
+
+OPENAI_API_KEY="your_openai_api_key"
+```
+
+Replace the placeholder values with your actual credentials.
+
+**Important:** Never commit `.env.local` or expose your API keys in a public repository.
+
+### 5. Configure the database
+
+Set up your PostgreSQL database and apply the Drizzle migrations required by the project.
+
+Check the available database scripts in `package.json` before running migrations.
+
+### 6. Start the development server
+
+```bash
+npm run dev
+```
+
+Open your browser:
+
+```text
+http://localhost:3000
+```
+
+---
+
+## How to Use
+
+1. Open the Privacy Guard website.
+2. Enter the Android application's name.
+3. Paste its `AndroidManifest.xml` content.
+4. Paste the application's privacy policy text.
+5. Click **Analyze Risk**.
+6. Review the detected permissions and privacy concerns.
+7. Examine the explanations and recommendations.
+
+---
+
+## Testing
+
+Privacy Guard can be tested using different Android application scenarios:
+
+| Test Scenario | Purpose |
+|---|---|
+| Calculator Application | Test low-risk permissions |
+| Photo Editor | Test feature-related permissions |
+| Weather Application | Test location permissions |
+| Flashlight Application | Test permission-policy mismatches |
+| Message Backup Utility | Test sensitive permissions |
+| Network-Based Application | Test network security concerns |
+| Offline Application | Test minimal permissions |
+| Invalid XML | Test input validation and error handling |
+
+---
+
+## Security & Privacy Considerations
+
+- API keys must remain on the server side.
+- Environment variables must not be exposed to the frontend.
+- Database credentials must never be committed to GitHub.
+- User-provided XML and policy text should be validated.
+- AI-generated findings should be treated as assessments, not definitive security verdicts.
+
+**Important limitation:** A permission declared in an Android manifest does not prove that the application actually uses that permission at runtime. A complete security assessment may require APK inspection, source-code analysis, and runtime testing.
+
+---
+
+## Deployment
+
+Privacy Guard can be deployed using [Vercel](https://vercel.com/).
+
+Deployment requirements:
+
+1. Push the project to GitHub.
+2. Import the repository into Vercel.
+3. Configure `DATABASE_URL` and `OPENAI_API_KEY` in Vercel Environment Variables.
+4. Ensure the production database is accessible.
+5. Apply the required
